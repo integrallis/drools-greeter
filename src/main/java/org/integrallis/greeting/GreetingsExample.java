@@ -10,6 +10,7 @@ import org.kie.api.runtime.KieSession;
 public class GreetingsExample {
 
     public static final void main(String[] args) {
+    	    KieSession kSession = null;
         try {
             // load up the knowledge base
         	    
@@ -20,7 +21,7 @@ public class GreetingsExample {
     	        KieContainer kContainer = ks.getKieClasspathContainer();
     	        
     	        // 3. - Build a new KieSession
-            KieSession kSession = kContainer.newKieSession("ksession-rules");
+            kSession = kContainer.newKieSession("ksession-rules");
 
             // 4. - Assert some Facts (Person/TimeOfDay objects)
             
@@ -30,6 +31,8 @@ public class GreetingsExample {
             
         } catch (Throwable t) {
             t.printStackTrace();
+        } finally {
+          	kSession.dispose();
         }
     }
 
