@@ -6,4 +6,25 @@ rule "GreetingGoodMorning"
 	then 
 		System.out.print("Good Morning, ");
 end
+
+rule "GreetingAndSalutationGoodAfternoon"
+	when
+		TimeOfDay(hour >= 12, hour <= 17)
+	then 	
+		System.out.print("Good Afternoon");
+end
+
+rule "GreetingAndSalutationGoodEvening"
+	when
+		TimeOfDay(hour >= 18, hour <= 22)
+	then 	
+		System.out.print("Good Evening");
+end
+
+rule "GreetingAndSalutationGoodNight"
+	when
+		TimeOfDay(hour >= 23, hour <= 24)
+	then 	
+		System.out.print("Good Night");
+end
  
