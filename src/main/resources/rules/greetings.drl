@@ -3,28 +3,32 @@ package org.integrallis.greeting
 rule "GreetingGoodMorning"
 	when
 		TimeOfDay(hour < 12)
+		person:Person()
 	then 
-		System.out.print("Good Morning, ");
+		System.out.println("Good Morning, " + person.getName());
 end
 
 rule "GreetingAndSalutationGoodAfternoon"
 	when
 		TimeOfDay(hour >= 12, hour <= 17)
+		person:Person()
 	then 	
-		System.out.print("Good Afternoon");
+		System.out.println("Good Afternoon, " + person.getName());
 end
 
 rule "GreetingAndSalutationGoodEvening"
 	when
 		TimeOfDay(hour >= 18, hour <= 22)
+		person:Person()
 	then 	
-		System.out.print("Good Evening");
+		System.out.println("Good Evening, " + person.getName());
 end
 
 rule "GreetingAndSalutationGoodNight"
 	when
 		TimeOfDay(hour >= 23, hour <= 24)
+		person:Person()
 	then 	
-		System.out.print("Good Night");
+		System.out.println("Good Night, " + person.getName());
 end
  
