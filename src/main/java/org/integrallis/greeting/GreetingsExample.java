@@ -3,6 +3,8 @@ package org.integrallis.greeting;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 
 import static org.integrallis.greeting.Person.Education.*;
 import static org.integrallis.greeting.Person.Gender.*;
@@ -41,6 +43,16 @@ public class GreetingsExample {
             
             // 5. - Fire the Rules
             kSession.fireAllRules();
+            
+            // 6 - query for results
+            QueryResults results = kSession.getQueryResults( "GetAllGreetingAndSalutations" );
+
+         	System.out.println( "There are " + results.size() + " greetings and salutations" );
+
+ 			for ( QueryResultsRow row : results ) {
+ 			    GreetingAndSalutation greeting = (GreetingAndSalutation) row.get( "greeting" );
+ 			    System.out.println( greeting.greetAndSalute() );
+ 			}
             
         } catch (Throwable t) {
             t.printStackTrace();

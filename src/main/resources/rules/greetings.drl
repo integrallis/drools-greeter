@@ -1,11 +1,22 @@
 package org.integrallis.greeting
 
-rule "GreetingGoodMorning"
+import org.integrallis.greeting.Person.Education;
+import org.integrallis.greeting.Person.Gender;
+import org.integrallis.greeting.Person.MaritalStatus;
+
+/**
+ * GreetingAndSalutation Rules
+ */
+ 
+rule "GreetingAndSalutationGoodMorning"
 	when
 		TimeOfDay(hour < 12)
 		person:Person()
 	then 
-		System.out.println("Good Morning, " + person.getName());
+		GreetingAndSalutation greeting = new GreetingAndSalutation();
+		greeting.setGreeting("Good Morning");
+		greeting.setPerson(person);
+		insert(greeting);
 end
 
 rule "GreetingAndSalutationGoodAfternoon"
@@ -13,7 +24,10 @@ rule "GreetingAndSalutationGoodAfternoon"
 		TimeOfDay(hour >= 12, hour <= 17)
 		person:Person()
 	then 	
-		System.out.println("Good Afternoon, " + person.getName());
+		GreetingAndSalutation greeting = new GreetingAndSalutation();
+		greeting.setGreeting("Good Afternoon");
+		greeting.setPerson(person);
+		insert(greeting);
 end
 
 rule "GreetingAndSalutationGoodEvening"
@@ -21,7 +35,10 @@ rule "GreetingAndSalutationGoodEvening"
 		TimeOfDay(hour >= 18, hour <= 22)
 		person:Person()
 	then 	
-		System.out.println("Good Evening, " + person.getName());
+		GreetingAndSalutation greeting = new GreetingAndSalutation();
+		greeting.setGreeting("Good Evening");
+		greeting.setPerson(person);
+		insert(greeting);
 end
 
 rule "GreetingAndSalutationGoodNight"
@@ -29,6 +46,69 @@ rule "GreetingAndSalutationGoodNight"
 		TimeOfDay(hour >= 23, hour <= 24)
 		person:Person()
 	then 	
-		System.out.println("Good Night, " + person.getName());
+		GreetingAndSalutation greeting = new GreetingAndSalutation();
+		greeting.setGreeting("Good Night");
+		greeting.setPerson(person);
+		insert(greeting);
 end
- 
+
+/**
+ * Salutation Rules
+ */
+
+rule "SalutationMrs"
+	when
+		person:Person(personName: name, gender == Gender.FEMALE, maritalStatus == MaritalStatus.MARRIED, education != Education.PHD)
+		greeting:GreetingAndSalutation(person == person, salutation == null)
+	then 
+		greeting.setSalutation("Mrs.");
+		update(greeting);
+end
+
+rule "SalutationMs"
+	when
+		person:Person(personName: name, gender == Gender.FEMALE, maritalStatus == MaritalStatus.SINGLE, education != Education.PHD)
+		greeting:GreetingAndSalutation(person == person, salutation == null)
+	then 	
+		greeting.setSalutation("Ms.");
+		update(greeting);
+end
+
+rule "SalutationMr"
+	when
+		person:Person(personName: name, gender == Gender.MALE, education < Education.PHD, age > 10)
+		greeting:GreetingAndSalutation(person == person, salutation == null)
+	then 
+		greeting.setSalutation("Mr.");
+		update(greeting);	
+end
+
+rule "SalutationDr"
+	when
+		person:Person(personName: name, education >= Education.PHD)
+		greeting:GreetingAndSalutation(person == person, salutation == null)
+	then 	
+		greeting.setSalutation("Dr.");
+		update(greeting);
+end
+
+rule "SalutationLittle"
+	when
+		person:Person(personName: name, gender == Gender.MALE, maritalStatus == MaritalStatus.SINGLE, age <= 10)
+		greeting:GreetingAndSalutation(person == person, salutation == null)
+	then 
+		greeting.setSalutation("Little");
+		update(greeting);
+end
+
+rule "PrintAll"
+    enabled false
+	when
+	    greeting: GreetingAndSalutation(complete);
+	then
+	    System.out.println(greeting.greetAndSalute());
+end
+
+query "GetAllGreetingAndSalutations"
+  greeting : GreetingAndSalutation(complete)
+end
