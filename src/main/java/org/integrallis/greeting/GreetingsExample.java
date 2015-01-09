@@ -12,13 +12,22 @@ public class GreetingsExample {
     public static final void main(String[] args) {
         try {
             // load up the knowledge base
+        	    
+        	    // 1. - Get the KieServices singleton factory
 	        KieServices ks = KieServices.Factory.get();
+	        
+	        // 2. - Get KieContainer from the KieServices factory
     	        KieContainer kContainer = ks.getKieClasspathContainer();
+    	        
+    	        // 3. - Build a new KieSession
             KieSession kSession = kContainer.newKieSession("ksession-rules");
 
-            // go !
-
+            // 4. - Assert some Facts (Person/TimeOfDay objects)
+            
+            
+            // 5. - Fire the Rules
             kSession.fireAllRules();
+            
         } catch (Throwable t) {
             t.printStackTrace();
         }
