@@ -14,10 +14,6 @@ public class GreetingAndSalutation {
     
     public String greetAndSalute() { return greeting + ", " + salutation + " " + person.getName(); }
     
-    public boolean isComplete() {
-        return (greeting != null && salutation != null);
-    }
-    
     @Override
     public String toString() {
         return greetAndSalute();

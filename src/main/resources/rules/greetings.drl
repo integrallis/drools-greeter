@@ -104,11 +104,11 @@ end
 rule "PrintAll"
     enabled false
 	when
-	    greeting: GreetingAndSalutation(complete);
+	    greeting: GreetingAndSalutation(salutation != null, greeting != null)
 	then
 	    System.out.println(greeting.greetAndSalute());
 end
 
-query "GetAllGreetingAndSalutations"
-  greeting : GreetingAndSalutation(complete)
+query "GetAllGreetingsAndSalutations"
+  greeting : GreetingAndSalutation(salutation != null, greeting != null)
 end

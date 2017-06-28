@@ -27,7 +27,7 @@ public class SimpleGreetingAndSalutationsTest extends BaseDroolsTestCase {
 		knowledgeSession.fireAllRules();
 		
 		// Query here!
-		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingAndSalutations" );
+		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingsAndSalutations" );
 		
 		// Make Assertions
 		assertEquals("There should be only one greeting and salutation", 1, results.size());
@@ -49,7 +49,7 @@ public class SimpleGreetingAndSalutationsTest extends BaseDroolsTestCase {
 		knowledgeSession.fireAllRules();
 		
 		// Query here!
-		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingAndSalutations" );
+		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingsAndSalutations" );
 		
 		// Make Assertions
 		assertEquals("There should be only one greeting and salutation", 1, results.size());
@@ -71,7 +71,7 @@ public class SimpleGreetingAndSalutationsTest extends BaseDroolsTestCase {
 		knowledgeSession.fireAllRules();
 		
 		// Query here!
-		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingAndSalutations" );
+		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingsAndSalutations" );
 		
 		// Make Assertions
 		assertEquals("There should be only one greeting and salutation", 1, results.size());
@@ -93,7 +93,7 @@ public class SimpleGreetingAndSalutationsTest extends BaseDroolsTestCase {
 		knowledgeSession.fireAllRules();
 		
 		// Query here!
-		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingAndSalutations" );
+		QueryResults results = knowledgeSession.getQueryResults( "GetAllGreetingsAndSalutations" );
 		
 		// Make Assertions
 		assertEquals("There should be only one greeting and salutation", 1, results.size());

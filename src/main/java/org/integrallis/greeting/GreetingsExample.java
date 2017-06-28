@@ -16,17 +16,17 @@ import static org.integrallis.greeting.Person.MaritalStatus.*;
 public class GreetingsExample {
 
     public static final void main(String[] args) {
-    	    KieSession kSession = null;
+    	KieSession kSession = null;
         try {
             // load up the knowledge base
         	    
-        	    // 1. - Get the KieServices singleton factory
+        	// 1. - Get the KieServices singleton factory
 	        KieServices ks = KieServices.Factory.get();
 	        
 	        // 2. - Get KieContainer from the KieServices factory
-    	        KieContainer kContainer = ks.getKieClasspathContainer();
+    	    KieContainer kContainer = ks.getKieClasspathContainer();
     	        
-    	        // 3. - Build a new KieSession
+    	    // 3. - Build a new KieSession
             kSession = kContainer.newKieSession("ksession-rules");
 
             // 4. - Assert some Facts (Person/TimeOfDay objects)
@@ -45,7 +45,7 @@ public class GreetingsExample {
             kSession.fireAllRules();
             
             // 6 - query for results
-            QueryResults results = kSession.getQueryResults( "GetAllGreetingAndSalutations" );
+            QueryResults results = kSession.getQueryResults( "GetAllGreetingsAndSalutations" );
 
          	System.out.println( "There are " + results.size() + " greetings and salutations" );
 
